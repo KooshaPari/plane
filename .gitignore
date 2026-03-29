@@ -34,12 +34,26 @@ yarn-error.log*
 pnpm-debug.log*
 .pnpm-debug.log*
 
-# Local env files
+# Env files — NEVER commit actual secrets
 .env
 .env.local
+.env.development
 .env.development.local
-.env.test.local
+.env.production
 .env.production.local
+.env.example  # Template only — copy to .env and fill in real values
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Doppler / secrets manager
+.doppler/
+
+# Secrets rotation scripts
+scripts/
+scripts/**
 
 # Vercel
 .vercel
