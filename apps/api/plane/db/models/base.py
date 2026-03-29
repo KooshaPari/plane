@@ -4,7 +4,7 @@ import uuid
 from django.db import models
 
 # Third party imports
-from crum import get_current_user
+#from crum import get_current_user
 
 # Module imports
 from ..mixins import AuditModel
