@@ -5,5 +5,15 @@
  */
 
 import type { RouteConfigEntry } from "@react-router/dev/routes";
+import { layout, route } from "@react-router/dev/routes";
 
-export const extendedRoutes: RouteConfigEntry[] = [];
+// AgilePlus extended routes
+export const extendedRoutes: RouteConfigEntry[] = [
+  layout("./(all)/[workspaceSlug]/(extended)/layout.tsx", [
+    // Agents routes
+    route("agents", "./(all)/[workspaceSlug]/(extended)/agents/page.tsx"),
+    route("agents/:agentId", "./(all)/[workspaceSlug]/(extended)/agents/[agentId]/page.tsx"),
+    // Worktrees routes
+    route("worktrees", "./(all)/[workspaceSlug]/(extended)/worktrees/page.tsx"),
+  ]),
+];
