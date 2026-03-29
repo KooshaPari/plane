@@ -79,7 +79,7 @@ MIDDLEWARE = [
 
 # Rest Framework settings
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication", "plane.authentication.authkit.AuthKitTokenAuthentication"),
     "DEFAULT_THROTTLE_CLASSES": ("rest_framework.throttling.AnonRateThrottle",),
     "DEFAULT_THROTTLE_RATES": {
         "anon": "30/minute",
@@ -361,6 +361,10 @@ LIVE_URL = urljoin(LIVE_BASE_URL, LIVE_BASE_PATH) if LIVE_BASE_URL else None
 
 # WEB URL
 WEB_URL = os.environ.get("WEB_URL")
+# AuthKit Configuration
+AUTHKIT_API_URL = os.environ.get("AUTHKIT_API_URL", "http://localhost:8001")
+AUTHKIT_API_KEY = os.environ.get("AUTHKIT_API_KEY", "")
+AUTHKIT_VERIFY_TLS = os.environ.get("AUTHKIT_VERIFY_TLS", "true").lower() != "false"
 
 HARD_DELETE_AFTER_DAYS = int(os.environ.get("HARD_DELETE_AFTER_DAYS", 60))
 

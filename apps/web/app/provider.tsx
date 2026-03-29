@@ -15,6 +15,9 @@ import { Toast } from "@plane/propel/toast";
 import { resolveGeneralTheme } from "@plane/utils";
 // polyfills
 import "@/lib/polyfills";
+// AuthKit provider
+import { AuthKitProvider } from "@/core/providers/authkit";
+
 // mobx store provider
 import { StoreProvider } from "@/lib/store-context";
 
@@ -54,7 +57,9 @@ export function AppProvider(props: IAppProvider) {
             <InstanceWrapper>
               <Suspense>
                 <ChatSupportModal />
-                <SWRConfig value={WEB_SWR_CONFIG}>{children}</SWRConfig>
+                <SWRConfig value={WEB_SWR_CONFIG}>
+                  <AuthKitProvider>{children}</AuthKitProvider>
+                </SWRConfig>
               </Suspense>
             </InstanceWrapper>
           </StoreWrapper>
