@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2023-present Plane Software, Inc. and contributors
+ * SPDX-License-Identifier: AGPL-3.0-only
+ * See the LICENSE file for details.
+ */
+
 import type { HocuspocusProvider } from "@hocuspocus/provider";
 import type { Extensions } from "@tiptap/core";
 import Collaboration from "@tiptap/extension-collaboration";
@@ -54,10 +60,12 @@ export const useCollaborativeEditor = (props: UseCollaborativeEditorArgs) => {
     isTouchDevice,
     onEditorFocus,
     placeholder,
+    showPlaceholderOnEmpty,
     tabIndex,
     titleRef,
     updatePageProperties,
     user,
+    actions,
   } = props;
 
   const { mainNavigationExtension, titleNavigationExtension, setMainEditor, setTitleEditor } = useEditorNavigation();
@@ -123,6 +131,7 @@ export const useCollaborativeEditor = (props: UseCollaborativeEditorArgs) => {
       onEditorFocus,
       onTransaction,
       placeholder,
+      showPlaceholderOnEmpty,
       provider,
       tabIndex,
     }),
@@ -147,6 +156,7 @@ export const useCollaborativeEditor = (props: UseCollaborativeEditorArgs) => {
       onEditorFocus,
       onTransaction,
       placeholder,
+      showPlaceholderOnEmpty,
       tabIndex,
     ]
   );

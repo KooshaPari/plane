@@ -7,22 +7,34 @@
 
 import { useState } from "react";
 import { observer } from "mobx-react";
-import { Button } from "@plane/ui";
+import { useParams } from "react-router";
 import { useTranslation } from "@plane/i18n";
-import { GitBranch, Plus } from "lucide-react";
+import { Button } from "@plane/ui";
+import { Badge } from "@plane/ui";
+import { GitBranch, Plus, Activity } from "lucide-react";
 
 export default observer(function WorktreesPage() {
   const { t } = useTranslation();
-  const [worktrees, setWorktrees] = useState<any[]>([]);
-  const [isLoading] = useState(false);
+  const params = useParams();
+  const workspaceSlug = params.workspaceSlug?.toString() ?? "";
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-text-secondary">Loading...</div>
-      </div>
-    );
-  }
+  const [worktrees] = useState([
+    { id: "wt-1", name: "feature-auth", branch: "feature/auth", status: "active", last_commit: "2h ago" },
+    { id: "wt-2", name: "bugfix-sidebar", branch: "bugfix/sidebar", status: "inactive", last_commit: "1d ago" },
+  ]);
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "active":
+        return <Badge color="green" size="sm">Active</Badge>;
+      case "inactive":
+        return <Badge color="gray" size="sm">Inactive</Badge>;
+      case "syncing":
+        return <Badge color="yellow" size="sm">Syncing</Badge>;
+      default:
+        return <Badge size="sm">{status}</Badge>;
+    }
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -32,31 +44,46 @@ export default observer(function WorktreesPage() {
             {t("worktrees.title", "Worktrees")}
           </h1>
           <p className="text-sm text-text-secondary mt-1">
-            {t("worktrees.description", "Manage git worktrees.")}
+            {t("worktrees.description", "Manage worktrees for this workspace.")}
           </p>
         </div>
-        <Button size="sm" prependIcon={<Plus className="h-4 w-4" />}>
-          {t("worktrees.create", "Create Worktree")}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="neutral" size="sm">
+            {t("worktrees.sync", "Sync All")}
+          </Button>
+          <Button size="sm" prependIcon={<Plus className="h-4 w-4" />}>
+            {t("worktrees.create", "Create Worktree")}
+          </Button>
+        </div>
       </div>
 
       {worktrees.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {worktrees.map((wt: any) => (
+          {worktrees.map((wt) => (
             <div
-              key={wt.name}
-              className="p-4 border border-custom-border-200 rounded-lg hover:bg-action-hover cursor-pointer"
+              key={wt.id}
+              className="p-4 border border-custom-border-200 rounded-lg hover:bg-custom-background-50 transition-colors"
             >
               <div className="flex items-start gap-3">
-                <div className="h-10 w-10 rounded-lg bg-custom-background-80 flex items-center justify-center">
-                  <GitBranch className="h-5 w-5 text-custom-text-300" />
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-custom-background-80 text-custom-text-300 flex-shrink-0">
+                  <GitBranch className="h-5 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-medium text-text-primary truncate">{wt.name}</h3>
-                    <span className="text-xs text-text-secondary">{wt.status || "ready"}</span>
+                    <h3 className="text-sm font-medium text-text-primary truncate">
+                      {wt.name}
+                    </h3>
+                    {getStatusBadge(wt.status)}
                   </div>
-                  <p className="text-xs text-text-secondary truncate">{wt.path || "No path"}</p>
+                  <p className="text-xs text-text-secondary truncate">
+                    {wt.branch}
+                  </p>
+                  <div className="flex items-center gap-4 mt-1">
+                    <span className="text-xs text-text-secondary flex items-center gap-1">
+                      <Activity className="h-3 w-3" />
+                      {wt.last_commit}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,7 +98,7 @@ export default observer(function WorktreesPage() {
             {t("worktrees.empty.title", "No worktrees yet")}
           </h3>
           <p className="text-sm text-text-secondary text-center mb-4 max-w-sm">
-            {t("worktrees.empty.description", "Create your first worktree.")}
+            {t("worktrees.empty.description", "Create your first worktree to get started.")}
           </p>
           <Button size="sm" prependIcon={<Plus className="h-4 w-4" />}>
             {t("worktrees.create", "Create Worktree")}

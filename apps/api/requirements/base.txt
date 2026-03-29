@@ -1,7 +1,7 @@
 # base requirements
 
 # django
-Django==4.2.28
+Django==4.2.29
 # rest framework
 djangorestframework==3.15.2
 # postgres
@@ -21,7 +21,7 @@ celery==5.4.0
 django_celery_beat==2.6.0
 django-celery-results==2.5.1
 # file serve
-whitenoise==6.6.0
+whitenoise==6.11.0
 # fake data
 faker==25.0.0
 # filters
