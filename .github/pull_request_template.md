@@ -1,20 +1,19 @@
-### Description
-<!-- Provide a detailed description of the changes in this PR -->
+# Pull Request Description
 
-### Type of Change
-<!-- Put an 'x' in the boxes that apply -->
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] Feature (non-breaking change which adds functionality)
-- [ ] Improvement (change that would cause existing functionality to not work as expected)
-- [ ] Code refactoring
-- [ ] Performance improvements
+## Summary
+<!-- What does this PR do? -->
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
 - [ ] Documentation update
 
-### Screenshots and Media (if applicable)
-<!-- Add screenshots to help explain your changes, ideally showcasing before and after -->
+## Testing
+<!-- How was this tested? -->
 
-### Test Scenarios 
-<!-- Please describe the tests that you ran to verify your changes -->
-
-### References
-<!-- Link related issues if there are any -->
+## Checklist
+- [ ] Code follows project style guidelines
+- [ ] Self-review completed
+- [ ] Tests added/updated
+- [ ] Documentation updated
